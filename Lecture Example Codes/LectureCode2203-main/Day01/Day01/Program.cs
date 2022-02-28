@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Day_01_Lecture_Code
+namespace Day01
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
