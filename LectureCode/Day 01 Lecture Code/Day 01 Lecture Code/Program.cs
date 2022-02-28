@@ -8,6 +8,7 @@ namespace Day_01_Lecture_Code
         {
             PrintMessage();
             string msg = GetMessage();
+            Console.ReadKey();
         }
 
         static void PrintMessage()
