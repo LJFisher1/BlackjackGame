@@ -6,7 +6,20 @@ namespace Day_01_Lecture_Code
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            PrintMessage();
+            string msg = GetMessage();
+        }
+
+        static void PrintMessage()
+        {
+            Console.WriteLine("German superheroes are the wurst!");
+        }
+
+        static string GetMessage()
+        {
+            Console.Write("Please enter your favorite superhero? ");
+            string Message = Console.ReadLine();
+            return Message;
         }
     }
 }
