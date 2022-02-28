@@ -51,7 +51,7 @@ namespace Day_01_Lecture_Code
             }
             else
             {
-                Console.WriteLine("Thanks a lot Steev!");
+                Console.WriteLine("Thanks a lot Steve!");
             }
         }
 
