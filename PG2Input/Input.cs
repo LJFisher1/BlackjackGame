@@ -8,20 +8,35 @@ namespace PG2Input
 {
     public static class Input
     {
-        static int ReadInteger()
+        public static int ReadInteger(string userInput, int min, int max)
         {
-            Console.Write("Please enter an integer: ");
-            string userInput = Console.ReadLine();
-            bool validInput = int.TryParse(userInput, out int validOutput);
-            if(validInput)
+            min = int.MinValue;
+            max = int.MaxValue;
+            int goodValue = 0;
+            // prompt user for input
+            Console.WriteLine("Please enter an integer: ");
+            // read the input
+            userInput = Console.ReadLine();
+            // convert input from string to int
+            bool validInput;
+            // check to see if the input is valid
+            int.TryParse(userInput, out int validOutput);
+            // if input is valid continue, otherwise loop back
+            if (validOutput > min && validOutput < max)
             {
-
+                validInput = true;
+                if (validInput == true)
+                {
+                    goodValue = validOutput;
+                }
             }
             else
             {
-
+                Console.Write("Thats not a valid integer...");
             }
-            return 0;
+            // return int
+            return goodValue;
+            
         }
         static void ReadString()
         {
