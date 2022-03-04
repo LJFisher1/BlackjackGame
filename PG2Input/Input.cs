@@ -18,7 +18,7 @@ namespace PG2Input
                 string userInput = Console.ReadLine();
                 if(int.TryParse(userInput, out int validOutput))
                 {
-                    if (validOutput > min && validOutput < max)
+                    if (validOutput >= min && validOutput <= max)
                     {
                         zed = validOutput;
                         break;
@@ -73,14 +73,23 @@ namespace PG2Input
         //prompt and read the user’s input.You should use your ReadInteger method you created earlier
 
         // Create a method called ReadChoice that will ask the user to select from a list of options, like a menu.
-        static void ReadChoice(string prompt, string[] options, out int selection)
-        {
+        // Show a list of options to the user
+        // pass the list of options as a string array
+        // loop over the array, showing each option on a new line
 
-            for(int i = 0; i < options.Length; i++)
+        // Prompt the user to pick an option
+        // Get the user's selection
+        // use the ReadInteger method
+        // return the selection through an out parameter
+
+        public static void ReadChoice(string prompt, string[] options, out int selection)
+        {
+            
+            foreach (string s in options)
             {
-                options[i] = options[i];
+                Console.WriteLine($"{s}");
             }
-               selection = something with the read int method
+            selection = ReadInteger(prompt, 1, options.Length);
 
         }
     }  
