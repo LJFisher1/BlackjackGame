@@ -40,7 +40,7 @@ namespace Lab1
             {
                 string speech = GetSpeech();
 
-                string[] listOfWords = speech.Split(new char[] { ' ', '.', ':', '?', '-', '\n', '\t', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] listOfWords = speech.Split(new char[] { ' ', ',', '.', ':', '?', '-', '\n', '\t', '\r' }, StringSplitOptions.RemoveEmptyEntries);
                 List<string> words = new List<string>(listOfWords);
 
 
@@ -65,59 +65,76 @@ namespace Lab1
                 string choice = "Pick a choice: ";
                 string[] options = { "1. Speech", "2. List of Words", "3. Histogram", "4. Search for Word", "5. Remove Word", "6. Exit" };
                 int selection;
-                while (menuRun)
-                {   // stuck on what to do with the read choice/what to put in the switch ()
-                    Input.ReadChoice(choice, options, out selection);
-                    switch (selection)
-                    {
-                        case 1:
-                            Console.Clear();
-                            Console.Write(speech);
-                            Console.Write("Press any key to return to menu..");
-                            Console.ReadKey();
-                            Console.Clear();
-                            break;
-                        case 2:
-                            Console.Clear();
-                            for (int i = 0; i < words.Count; i++)
-                            {
-                            Console.WriteLine(words[i]);
-                            }
-                            Console.Write("Press any key to return to menu..");
-                            Console.ReadKey();
-                            Console.Clear();
-                            break;
-                        case 3:
+            while (menuRun)
+            {   // stuck on what to do with the read choice/what to put in the switch ()
+                Input.ReadChoice(choice, options, out selection);
+                switch (selection)
+                {
+                    case 1:
                         Console.Clear();
-                        for (int i = 0; i < wordDictionary.Count; i++)
+                        Console.Write(speech);
+                        Console.WriteLine("\n\nPress any key to return to menu..");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case 2:
+                        Console.Clear();
+                        for (int i = 0; i < words.Count; i++)
                         {
-                            key is the string, value is the amount of times it appears in the string (int)
-                            write out the key, write out the value of the key
-                        }   
+                            Console.WriteLine(words[i]);
+                        }
                         Console.Write("Press any key to return to menu..");
                         Console.ReadKey();
                         Console.Clear();
                         break;
-                        case 4:
-                            Console.Write("Search for Word not yet implemented");
-                            break;
-                        case 5:
-                            Console.Write("Remove Word not yet implemented");
-                            break;
-                        case 6:
-                            Console.Write("Exit");
-                            menuRun = false;
-                            break;
-                    }
+                    case 3:
+                        Console.Clear();
+                        foreach (KeyValuePair<string, int> item in wordDictionary)
+                        {
+
+                            Console.ForegroundColor = ConsoleColor.Red;
+
+                            Console.Write(item.Key);
+
+                            Console.BackgroundColor = ConsoleColor.Blue;
+                            Console.CursorLeft = 10;
+                            for (int i = 0; i < item.Value; i++)
+                            {
+                                Console.Write(new string(" "));
+                            }
+
+                            Console.ResetColor();
+                            //for (int i = 0; i < item.Value; i++)
+                            //{
+                            //    Console.BackgroundColor = ConsoleColor.Blue;
+                            //}
+                            
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine($"{ item.Value:N1}");
+
+
+                        }
+                        Console.ResetColor();
+                        // key is the string, value is the amount of times it appears in the string (int)
+                        // write out the key, write out the value of the key
+                        // Console.BackgroundColor (Also reset it when you're done)
+
+                        Console.Write("Press any key to return to menu..");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case 4:
+                        Console.Write("Search for Word not yet implemented");
+                        break;
+                    case 5:
+                        Console.Write("Remove Word not yet implemented");
+                        break;
+                    case 6:
+                        Console.Write("Exit");
+                        menuRun = false;
+                        break;
                 }
-
-                // C-2 Show Histogram
-
-                //Now you have the information you need to add logic to the menu for the “Show Histogram” option.For each word 
-                //in the dictionary, print the word, the count and a bar representing the count as a horizontal bar chart(see
-                //screenshot).Format your chart to make it look nice! Use Console.CursorLeft to align the bars
-
-
+            }
                 // C-3 Search for Words
 
                 //Now you have the information you need to add logic to the menu for the “Search for Word” option. Ask the user 
