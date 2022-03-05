@@ -67,5 +67,5 @@ namespace PG2Input
             }
             selection = ReadInteger(prompt, 1, options.Length);
         }
-    }  
+        }  
 }
