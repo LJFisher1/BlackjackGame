@@ -57,8 +57,31 @@ namespace Lab1
                     wordDictionary.Add(words[i], 1);
                 }
             }
-                
-
+            static void NewMethod(string theKey, int theValue)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(theKey);
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.CursorLeft = 15;
+                for (int i = 0; i < theValue; i++)
+                {
+                    Console.Write(new string(" "));
+                }
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{ theValue}");
+                Console.ResetColor();
+            }
+            
+            static void Histogram(Dictionary<string, int> wordDictionary)
+            {
+                foreach (KeyValuePair<string, int> item in wordDictionary)
+                {
+                    NewMethod(item.Key, item.Value);
+                }
+                           
+            }
+            
 
                 // A-5 Menu Loop
                 bool menuRun = true;
@@ -89,42 +112,32 @@ namespace Lab1
                         break;
                     case 3:
                         Console.Clear();
-                        foreach (KeyValuePair<string, int> item in wordDictionary)
-                        {
-
-                            Console.ForegroundColor = ConsoleColor.Red;
-
-                            Console.Write(item.Key);
-
-                            Console.BackgroundColor = ConsoleColor.Blue;
-                            Console.CursorLeft = 10;
-                            for (int i = 0; i < item.Value; i++)
-                            {
-                                Console.Write(new string(" "));
-                            }
-
-                            Console.ResetColor();
-                            //for (int i = 0; i < item.Value; i++)
-                            //{
-                            //    Console.BackgroundColor = ConsoleColor.Blue;
-                            //}
-                            
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine($"{ item.Value:N1}");
-
-
-                        }
+                        Histogram(wordDictionary);
                         Console.ResetColor();
-                        // key is the string, value is the amount of times it appears in the string (int)
-                        // write out the key, write out the value of the key
-                        // Console.BackgroundColor (Also reset it when you're done)
-
                         Console.Write("Press any key to return to menu..");
                         Console.ReadKey();
                         Console.Clear();
                         break;
                     case 4:
-                        Console.Write("Search for Word not yet implemented");
+                        string searchWord = "";
+                        
+                        Console.Clear();
+                        Input.ReadString("What word would you like to search for? ", ref searchWord);
+                        if(wordDictionary.TryGetValue(searchWord, out int value))
+                        {
+                            NewMethod(searchWord, value);                         
+                            Console.Write("Press any key to return to menu..");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"{searchWord} was not found..");
+                            Console.Write("Press any key to return to menu..");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
                         break;
                     case 5:
                         Console.Write("Remove Word not yet implemented");
@@ -135,27 +148,21 @@ namespace Lab1
                         break;
                 }
             }
-                // C-3 Search for Words
+            // C-4 (BOOM), Sentences for Word
 
-                //Now you have the information you need to add logic to the menu for the “Search for Word” option. Ask the user 
-                //for a word to search for (“What word do you want to find ? “). Use ReadString to get the word from the user!
-                //If the word is in the Dictionary, print the word, bar, and count.
-
-
-                // C-4 (BOOM), Sentences for Word
-                
-                //ADD TO PART C-3
-                //Show the sentences that the word appears in. HINT: you can split the original speech text on different delimiters
-                //to get the sentences.
-                //If the word is NOT in the dictionary, print “< word > is not found.”. (replace < word > with what the user entered
+            //ADD TO PART C-3
+            //Show the sentences that the word appears in. HINT: you can split the original speech text on different delimiters
+            //to get the sentences.
+            //If the word is NOT in the dictionary, print “< word > is not found.”. (replace < word > with what the user entered
 
 
-                // C-5 Remove Word
+            // C-5 Remove Word
+            //Ask the user for a word to remove.Use ReadString to get the word to remove.
+            //Remove the word from the dictionary.If the word is not in the dictionary, show “< word > is not found”. (replace
+            //< word > with what the user entered).Do not use ContainsKey or TryGetValue.
+           
 
-                //ADD TO PART C-3
-                //Show the sentences that the word appears in. HINT: you can split the original speech text on different delimiters
-                //to get the sentences.
-                //If the word is NOT in the dictionary, print “< word > is not found.”. (replace < word > with what the user entered
+
             }
         
     }
