@@ -42,12 +42,11 @@ namespace Lab1
                 string speech = GetSpeech();
 
                 string[] listOfWords = speech.Split(new char[] { ' ', ',', '.', ':', '?', '-', '\n', '\t', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
                 List<string> words = new List<string>(listOfWords);
-                string[] listOfSentences = speech.Split(new char[] { '.', '?', '!' });
-                List<string> sentences = new List<string>(listOfSentences);
+                List<string> sentences = new List<string>(speech.Split(new char[] { '.', '?', '!' }));
 
-
-            Dictionary<string, int> wordDictionary = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
+            Dictionary<string, int> wordDictionary = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
             for (int i = 0; i < words.Count; i++)
             {
                 if(wordDictionary.ContainsKey(words[i]))
@@ -60,29 +59,18 @@ namespace Lab1
                     wordDictionary.Add(words[i], 1);
                 }
             }
-            static void NewMethod(string theKey, int theValue)
+            static void NewMethod(int length)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write(theKey);
                 Console.BackgroundColor = ConsoleColor.Blue;
-                Console.CursorLeft = 15;
-                for (int i = 0; i < theValue; i++)
+                for (int i = 0; i < length; i++)
                 {
+
                     Console.Write(new string(" "));
                 }
                 Console.ResetColor();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"{ theValue}");
-                Console.ResetColor();
+                
             }
-            static void Histogram(Dictionary<string, int> wordDictionary)
-            {
-                foreach (KeyValuePair<string, int> item in wordDictionary)
-                {
-                    NewMethod(item.Key, item.Value);
-                }
-                           
-            }
+            
             static void RemoveWord(string theKey, Dictionary<string, int> wordDictionary)
             {
                 theKey = Console.ReadLine();
@@ -127,7 +115,18 @@ namespace Lab1
                         break;
                     case 3:
                         Console.Clear();
-                        Histogram(wordDictionary);
+                            foreach (KeyValuePair<string, int> item in wordDictionary)
+                            {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write(item.Key);
+                            Console.CursorLeft = 15;
+                            Console.ResetColor();
+                            NewMethod(item.Value);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine(item.Value);
+                            Console.ResetColor();
+                        }
+                        
                         Console.ResetColor();
                         Console.Write("Press any key to return to menu..");
                         Console.ReadKey();
@@ -137,12 +136,21 @@ namespace Lab1
                         string searchWord = "";
                         Console.Clear();
                         Input.ReadString("What word would you like to search for? ", ref searchWord);
-                        if(wordDictionary.TryGetValue(searchWord, out int value))
+                        if(wordDictionary.ContainsKey(searchWord))
                         {
-                            NewMethod(searchWord, value);
-                            foreach (string word in listOfSentences) 
+                            Console.Write($"{searchWord}");
+                            NewMethod(wordDictionary[searchWord]);
+                            Console.Write(wordDictionary[searchWord] + "\n");
+                            foreach (string singleSentence in sentences)
                             {
-                                Console.Write(sentences);
+                                List<string> sent = new List<string>(singleSentence.Split(new char[] { ' ', ',', '.', ':', '?' }, StringSplitOptions.RemoveEmptyEntries));
+                                foreach (string word in sent)
+                                {
+                                    if(searchWord.Equals(word, StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        Console.WriteLine(singleSentence);
+                                    }
+                                }
                             }
                             Console.Write("Press any key to return to menu..");
                             Console.ReadKey();
@@ -172,21 +180,6 @@ namespace Lab1
                         break;
                 }
             }
-            // C-4 (BOOM), Sentences for Word
-
-            //ADD TO PART C-3
-            //Show the sentences that the word appears in. HINT: you can split the original speech text on different delimiters
-            //to get the sentences.
-            //If the word is NOT in the dictionary, print “< word > is not found.”. (replace < word > with what the user entered
-
-
-            // C-5 Remove Word
-            //Ask the user for a word to remove.Use ReadString to get the word to remove.
-            //Remove the word from the dictionary.If the word is not in the dictionary, show “< word > is not found”. (replace
-            //< word > with what the user entered).Do not use ContainsKey or TryGetValue.
-           
-
-
             }
         
     }
