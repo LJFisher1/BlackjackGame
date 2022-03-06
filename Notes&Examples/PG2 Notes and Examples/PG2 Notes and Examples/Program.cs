@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace PG2_Notes_and_Examples
 {
@@ -7,6 +8,20 @@ namespace PG2_Notes_and_Examples
         // put cursor over any methods to see what they do if confused
         static void Main(string[] args)
         {
+            int[] numbers = new int[5] { 31, 60, 19, 66, 90 };
+            foreach (var nums in numbers)
+            {
+                Console.WriteLine(nums);
+            }
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Console.WriteLine(numbers[i]);
+            }
+            int index = 0;
+            while(index < numbers.Length)
+            {
+                Console.WriteLine(numbers[index++]);
+            }
             // if you want to call the method, call the method it by name
 
             // this is how you call a method that doesn't return anything
