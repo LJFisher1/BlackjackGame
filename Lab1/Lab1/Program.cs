@@ -1,6 +1,7 @@
 ﻿using System;
 using PG2Input;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lab1
 {
@@ -42,9 +43,11 @@ namespace Lab1
 
                 string[] listOfWords = speech.Split(new char[] { ' ', ',', '.', ':', '?', '-', '\n', '\t', '\r' }, StringSplitOptions.RemoveEmptyEntries);
                 List<string> words = new List<string>(listOfWords);
+                string[] listOfSentences = speech.Split(new char[] { '.', '?', '!' });
+                List<string> sentences = new List<string>(listOfSentences);
 
 
-                Dictionary<string, int> wordDictionary = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
+            Dictionary<string, int> wordDictionary = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
             for (int i = 0; i < words.Count; i++)
             {
                 if(wordDictionary.ContainsKey(words[i]))
@@ -72,7 +75,6 @@ namespace Lab1
                 Console.WriteLine($"{ theValue}");
                 Console.ResetColor();
             }
-            
             static void Histogram(Dictionary<string, int> wordDictionary)
             {
                 foreach (KeyValuePair<string, int> item in wordDictionary)
@@ -81,7 +83,20 @@ namespace Lab1
                 }
                            
             }
-            
+            static void RemoveWord(string theKey, Dictionary<string, int> wordDictionary)
+            {
+                theKey = Console.ReadLine();
+                
+                bool isRemoved = wordDictionary.Remove(theKey);
+                if(isRemoved)
+                {
+                    Console.WriteLine($"'{theKey}' was removed.");
+                }
+                else
+                {
+                    Console.WriteLine($"'{theKey}' was not found.");
+                }
+            }
 
                 // A-5 Menu Loop
                 bool menuRun = true;
@@ -89,7 +104,7 @@ namespace Lab1
                 string[] options = { "1. Speech", "2. List of Words", "3. Histogram", "4. Search for Word", "5. Remove Word", "6. Exit" };
                 int selection;
             while (menuRun)
-            {   // stuck on what to do with the read choice/what to put in the switch ()
+            {  
                 Input.ReadChoice(choice, options, out selection);
                 switch (selection)
                 {
@@ -120,12 +135,15 @@ namespace Lab1
                         break;
                     case 4:
                         string searchWord = "";
-                        
                         Console.Clear();
                         Input.ReadString("What word would you like to search for? ", ref searchWord);
                         if(wordDictionary.TryGetValue(searchWord, out int value))
                         {
-                            NewMethod(searchWord, value);                         
+                            NewMethod(searchWord, value);
+                            foreach (string word in listOfSentences) 
+                            {
+                                Console.Write(sentences);
+                            }
                             Console.Write("Press any key to return to menu..");
                             Console.ReadKey();
                             Console.Clear();
@@ -133,14 +151,20 @@ namespace Lab1
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine($"{searchWord} was not found..");
+                            Console.WriteLine($" '{searchWord}' was not found..");
                             Console.Write("Press any key to return to menu..");
                             Console.ReadKey();
                             Console.Clear();
                         }
                         break;
                     case 5:
-                        Console.Write("Remove Word not yet implemented");
+                        Console.Clear();
+                        Console.Write("What word would you like to remove? ");
+                        string removedWord = "";
+                        RemoveWord(removedWord, wordDictionary);
+                        Console.Write("Press any key to return to the menu..");
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
                     case 6:
                         Console.Write("Exit");
