@@ -20,7 +20,8 @@ namespace PG2_Notes_and_Examples
             double returnedDouble = Multiplier(10, 3);
             // $ - C# interpolated strings
             Console.WriteLine($"10 * 3 = {returnedDouble}"); // returns 33 because number++ modified 10 to 11
-            // part of the notes.cs
+
+            // Pass by Value
             double num = 5;
             double num2 = 10;
             double product = Multiplier(num, num2); // passing by value
