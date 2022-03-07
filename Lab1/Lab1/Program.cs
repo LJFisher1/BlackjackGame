@@ -149,6 +149,7 @@ namespace Lab1
                                     if(searchWord.Equals(word, StringComparison.OrdinalIgnoreCase))
                                     {
                                         Console.WriteLine(singleSentence);
+                                        break;
                                     }
                                 }
                             }
