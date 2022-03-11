@@ -22,10 +22,8 @@ namespace Lab2
             //            COMMON MISTAKES: 
             //-1: you should print the sorted results side-by-side with the unsorted
             //-3: the Exit option does not exit
-
-
-            List<string> bubbleSortList = PG2Sorting.ReadFile();
-            
+            List<string> sortedList = PG2Sorting.ReadFile();
+            List<string> unsortedList = sortedList.ToList();
 
             bool menuRun = true;
             string choice = "Pick a choice: ";
@@ -36,26 +34,21 @@ namespace Lab2
                 switch (selection)
                 {
                     case 1:
-                        Console.Clear();
-                        List<string> unsortedBubble = bubbleSortList.ToList();
-                        PG2Sorting.BubbleSort(bubbleSortList);
-                        for (int i = 0; i < bubbleSortList.Count; i++)
-                        {
-                            Console.Write(bubbleSortList[i]);
-                            Console.CursorLeft = 45;
-                            Console.WriteLine(unsortedBubble[i]);
-                        }
-                        
-
-
+                        PG2Sorting.BubbleSort(sortedList);
+                        PG2Sorting.PrintList(unsortedList, sortedList);
                         Console.WriteLine("Press any key to return to the menu.");
                         Console.ReadKey();
                         Console.Clear();
                         break;
                     case 2:
-                        Console.Write("Merge sort not yet implemented.");
+                        sortedList = PG2Sorting.MergeSort(unsortedList);
+                        PG2Sorting.PrintList(unsortedList, sortedList);
+                        Console.WriteLine("Press any key to return to the menu.");
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
                     case 3:
+                        
                         Console.Write("Binary search not yet implemented.");
                         break;
                     case 4:

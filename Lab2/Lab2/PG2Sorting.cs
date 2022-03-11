@@ -21,12 +21,20 @@ namespace Lab2
         //list1 points to.
         //-1: not converting the array to a list.
         //-2: did not create a METHOD for reading the file
-
+        public static void PrintList(List<string> A, List<string> B)
+        {
+            Console.Clear();
+            Console.WriteLine("--------UNSORTED--------                       --------SORTED--------");
+            for (int i = 0; i < A.Count; i++)
+            {
+                Console.WriteLine($"{A[i],-45} {B[i]} ");
+            }
+        }
 
         public static List<string> ReadFile()
         {
             List<string> comicBooks = new List<string>();
-            
+
             using (StreamReader reader = new StreamReader("inputFile.csv"))
             {
                 string line;
@@ -63,7 +71,6 @@ namespace Lab2
         //logic inside the if. See the lectures slides for how to swap 2 items in a list
         public static void BubbleSort(List<string> bubbleString) // Also need to clone the list so you can show unsorted next to the sorted
         {
-
             int bubbleLength = bubbleString.Count;
             string temp;
             bool swapped;
@@ -78,7 +85,7 @@ namespace Lab2
                         temp = bubbleString[i - 1];
                         bubbleString[i - 1] = bubbleString[i];
                         bubbleString[i] = temp;
-                        // You swap the eleme1nts in the loop (bubbleString[], i - 1, i)
+                        // You swap the elements in the loop (bubbleString[], i - 1, i)
                         swapped = true; // and set swapped = true;
                     }
                     // end the if loop
@@ -87,90 +94,69 @@ namespace Lab2
                 // n:= n-1   decrement the element being compared by 1 so it doesn't skip anything
             } while (swapped);
 
-
-            // n := length(A)
-            // repeat
-            // swapped := false
-            // for i := 1 to n - 1 inclusive do
-            // if A[i - 1] > A[i] then
-            // swap(A, i - 1, i)
-            // swapped = true
-            // end if
-            // end for
-            // n := n - 1
-            // while swapped
-            //end procedure
         }
 
+        // start by dividing the list into sublists that only have 1 element in them
+        // then merge the individiual items into sorted lists
+        // continue merging until there is only one list
 
-        //        COMMON MISTAKES: 
-        //-10: did not follow the pseudo-code for bubble sort
-        //-5: Bubble sort can be more efficient.The inner for loop should track whether a swap happens.If the inner loop
-        //does not swap, then you can break out of the outer loop.
-        //-5: the bubble sort can be optimized more according to the pseudo-code.You can shorten the for loop by 1 after
-        //the for loop completes. Store the length of the list in a variable and subtract 1 from it after the for loop.This would
-        //mean 1 fewer item to compare each time you run the for loop.
-        //-1: in BubbleSort, you should set swapped = false right before the for loop.
-        //-1: the while condition in bubble sort is incorrect.You need to loop while a swap has happened.
-        //-2: did not create a METHOD for Bubble sort
+        public static List<string> MergeSort(List<string> mergeString)
+        {
+            if (mergeString.Count <= 1)
+            {
+                return mergeString;
+            }
+            List<string> left = new List<string>();
+            List<string> right = new List<string>();
+            for (int i = 0; i < mergeString.Count; i++)
+            {
+                if (i < mergeString.Count / 2)
+                {
+                    left.Add(mergeString[i]);
+                }
+                else
+                {
+                    right.Add(mergeString[i]);
+                }
+                left = MergeSort(left);
+                right = MergeSort(right);
+            }
+            return Merge(left, right);
+        }
+        public static List<string> Merge(List<string> left, List<string> right)
+        {
+            List<string> result = new List<string>();
+            while (left.Count > 0 && right.Count > 0)
+            {
+                int compareResult = left[0].CompareTo(right[0]);
+                if (compareResult == -1)
+                {
+                    result.Add(left[0]);
+                    left.RemoveAt(0);
+                }
+                else
+                {
+                    result.Add(right[0]);
+                    right.RemoveAt(0);
+                }
+            }
+            while (left.Count > 0)
+            {
+                result.Add(left[0]);
+                left.RemoveAt(0);
+            }
+            while (right.Count > 0)
+            {
+                result.Add(right[0]);
+                right.RemoveAt(0);
+            }
+            return result;
+        }
 
-
-
-        //        Merge Sort
-        //Write a METHOD to implement the Merge sort algorithm.You want to keep the original list unsorted so make sure
-        //to clone the original list each time you call the Merge sort.Your code must follow the pseudocode.
-        //Turn this Wikipedia pseudocode into C#:
-        //function merge_sort(list m) is
-        // // Base case. A list of zero or one elements is sorted, by definition.
-        // if length of m ≤ 1 then
-        // return m
-        //// Recursive case. First, divide the list into equal-sized sublists
-        //// consisting of the first half and second half of the list.
-        //// This assumes lists start at index 0.
-        //var left := empty list
-
-        //var right := empty list
-        // for I = 0 to length(m) do
-        // if i<(length of m)/2 then
-        //add m[i] to left
-        // else
-        // add m[i] to right
-        // // Recursively sort both sublists.
-        // left := merge_sort(left)
-        // right := merge_sort(right)
-        // // Then merge the now-sorted sublists.
-        // return merge(left, right)
-        //            function merge(left, right) is
-
-        // var result := empty list
-        // while left is not empty and right is not empty do
-        // {
-        // if first(left) ≤ first(right) then
-        // add first(left) to result
-        // remove first from left
-        // else
-        // add first(right) to result
-        // remove first from right
-        // }
-        // // Either left or right may have elements left; consume them.
-        // // (Only one of the following loops will actually be entered.)
-        // while left is not empty do
-        // {
-        // add first(left) to result
-        // remove first from left
-        // }
-        //while right is not empty do
-        //    {
-        //        add first(right) to result
-        // remove first from right
-        // }
-        // return result
-
-        //Common Mistakes
-        //-10: did not follow the pseudo-code for merge sort
-        //-2: the exit condition needs to be if the count of the list <= 1.
-        //-2: did not write a METHOD for Merge Sort
-
+        public static void BinarySearch(List<string> unsorted)
+        {
+            List<string> sorted = MergeSort(unsorted);
+        }
         //        Binary Search
         //Write a METHOD to implement the Binary Search algorithm(use a recursive approach). Your code must follow the
         //pseudocode.
