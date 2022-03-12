@@ -30,7 +30,7 @@ namespace PG2Input
                 }
                 else
                 {
-                    Console.WriteLine("Thats not an integer.");
+                    Console.WriteLine("Thats not an option.");
                 }
             }
             return zed;
