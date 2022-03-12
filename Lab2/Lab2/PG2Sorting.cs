@@ -170,7 +170,7 @@ namespace Lab2
             List<string> saveFile = unsortedList.ToList();
             saveFile = BubbleSort(saveFile);
             string filePath = "";
-            PG2Input.Input.ReadString("What do you want to name your file?", ref filePath);
+            PG2Input.Input.ReadString("What do you want to name your file? ", ref filePath);
             filePath = Path.ChangeExtension(filePath, ".json");
             using (StreamWriter sw = new StreamWriter(filePath))
             {

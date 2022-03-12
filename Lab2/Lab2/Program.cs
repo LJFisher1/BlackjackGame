@@ -41,16 +41,12 @@ namespace Lab2
                     case 1:
                         List<string> afterBubbleSort = PG2Sorting.BubbleSort(comicList);
                         PG2Sorting.PrintList(comicList, afterBubbleSort);
-                        Console.WriteLine("Press any key to return to the menu.");
-                        Console.ReadKey();
-                        Console.Clear();
+                        Input.MenuExit();
                         break;
                     case 2:
                         List<string>afterMergeSort = PG2Sorting.MergeSort(comicList);
                         PG2Sorting.PrintList(comicList, afterMergeSort);
-                        Console.WriteLine("Press any key to return to the menu.");
-                        Console.ReadKey();
-                        Console.Clear();
+                        Input.MenuExit();
                         break;
                     case 3:
                         for (int i = 0; i < comicList.Count; i++)
@@ -60,12 +56,11 @@ namespace Lab2
                             Console.CursorLeft = 45;
                             Console.WriteLine($"    Index: {i} \t\t Returned Index: {retNdx}");
                         }
-                        Console.WriteLine("Press any key to return to the menu.");
-                        Console.ReadKey();
-                        Console.Clear();
+                        Input.MenuExit();
                         break;
                     case 4:
-                        Console.Write("Save not yet implemented.");
+                        PG2Sorting.Save(comicList);
+                        Input.MenuExit();
                         break;
                     case 5:
                         Console.Write("Exit");
