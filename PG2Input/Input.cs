@@ -12,11 +12,11 @@ namespace PG2Input
         {
             bool validInput = false;
             int zed = 0;
-            while(validInput == false)
+            while (validInput == false)
             {
                 Console.Write(prompt);
                 string userInput = Console.ReadLine();
-                if(int.TryParse(userInput, out int validOutput))
+                if (int.TryParse(userInput, out int validOutput))
                 {
                     if (validOutput >= min && validOutput <= max)
                     {
@@ -37,16 +37,16 @@ namespace PG2Input
 
         }
 
-     
-       
+
+
         public static void ReadString(string prompt, ref string value)
         {
-            bool validString = false;          
+            bool validString = false;
             while (validString == false)
             {
                 Console.Write(prompt);
                 string s = Console.ReadLine();
-                {                  
+                {
                     if (string.IsNullOrEmpty(s))
                     {
                         Console.WriteLine("Invalid entry.");
@@ -56,7 +56,7 @@ namespace PG2Input
                         value = s;
                         break;
                     }
-                }   
+                }
             }
         }
         public static void ReadChoice(string prompt, string[] options, out int selection)
@@ -67,5 +67,12 @@ namespace PG2Input
             }
             selection = ReadInteger(prompt, 1, options.Length);
         }
-        }  
+
+        public static void MenuExit()
+        {
+            Console.WriteLine("\nPress any key to return to the menu.");
+            Console.ReadKey();
+            Console.Clear();
+        }
+    }
 }
