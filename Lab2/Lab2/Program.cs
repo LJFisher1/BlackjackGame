@@ -26,8 +26,6 @@ namespace Lab2
             List<string> bubbleSorted = PG2Sorting.BubbleSort(comicList);
             List<string> mergeSorted = PG2Sorting.MergeSort(comicList);
            
-
-
             bool menuRun = true;
             string choice = "Pick a choice: ";
             string[] options = { "1. Bubble Sort", "2. Merge Sort", "3. Binary Search", "4. Save", "5. Exit" };
@@ -39,12 +37,12 @@ namespace Lab2
                 {
                     
                     case 1:
-                        List<string> afterBubbleSort = PG2Sorting.BubbleSort(comicList);
+                        List<string> afterBubbleSort = PG2Sorting.BubbleSort(bubbleSorted);
                         PG2Sorting.PrintList(comicList, afterBubbleSort);
                         Input.MenuExit();
                         break;
                     case 2:
-                        List<string>afterMergeSort = PG2Sorting.MergeSort(comicList);
+                        List<string>afterMergeSort = PG2Sorting.MergeSort(mergeSorted);
                         PG2Sorting.PrintList(comicList, afterMergeSort);
                         Input.MenuExit();
                         break;
