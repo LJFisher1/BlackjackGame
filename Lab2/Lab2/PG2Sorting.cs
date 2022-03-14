@@ -121,6 +121,7 @@ namespace Lab2
             return result;
         }
 
+
         // BinarySearch(A[0..N - 1], searchTerm, low, high)
         public static int BinarySearch(List<string> unsorted, string searchTerm, int lowNdx, int highNdx)
         {
