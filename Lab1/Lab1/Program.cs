@@ -7,6 +7,7 @@ namespace Lab1
 {
     class Program
     {
+        
         static string GetSpeech()
         {
             string text = "My third story is about death. When I was 17, I read a quote that went something like: If you live each day as if it was your last, someday you'll most certainly be right. " +
@@ -85,9 +86,9 @@ namespace Lab1
                     Console.WriteLine($"'{theKey}' was not found.");
                 }
             }
-
-                // A-5 Menu Loop
-                bool menuRun = true;
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            // A-5 Menu Loop
+            bool menuRun = true;
                 string choice = "Pick a choice: ";
                 string[] options = { "1. Speech", "2. List of Words", "3. Histogram", "4. Search for Word", "5. Remove Word", "6. Exit" };
                 int selection;
@@ -98,7 +99,11 @@ namespace Lab1
                 {
                     case 1:
                         Console.Clear();
-                        Console.Write(speech);
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("\u2660");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.Black;
                         Console.WriteLine("\n\nPress any key to return to menu..");
                         Console.ReadKey();
                         Console.Clear();
